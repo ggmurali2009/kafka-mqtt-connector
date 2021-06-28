@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>
+			/home/muralimanoj/Desktop/kafka-connect/logfiles/connect-distributed.log
+		</file>
+		<append>true</append>
+
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>home/muralimanoj/Desktop/kafka-connect/logfiles/connect-distributed.%d{yyyy-MM-dd_HH}
+			</fileNamePattern>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%-30(%d %level)- %msg%n%ex</pattern>
+		</encoder>
+	</appender>
+	<logger name="org.apache" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="kafka-connect" level="TRACE" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</logger>
+
+</configuration>
